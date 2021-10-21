@@ -1,0 +1,155 @@
+{
+    "nodes": [
+        {
+            "id": "1",
+            "shape": "circularImage",
+            "image": "../imgs/학무늬베개/main.jpg",
+            "label": "학무늬 베개"
+        },
+        {
+            "id": "2",
+            "shape": "circularImage",
+            "image": "../imgs/학무늬베개/역상감(예시).jpeg",
+            "label": "역상감"
+        },
+        {
+            "id": "3",
+            "shape": "circularImage",
+            "image": "../imgs/학무늬베개/고려청자(대표).png",
+            "label": "청자"
+        },
+        {
+            "id": "5",
+            "shape": "circularImage",
+            "image": "../imgs/학무늬베개/학과 구름무늬.jpg",
+            "label": "학과 구름무늬"
+        },
+        {
+            "id": "6",
+            "shape": "circularImage",
+            "image": "../imgs/학무늬베개/학무늬 완.jpg",
+            "label": "학무늬 완"
+        },
+        {
+            "id": "7",
+            "shape": "circularImage",
+            "image": "../imgs/학무늬베개/고려(위치).png",
+            "label": "고려 13세기"
+        },
+        {
+            "id": "8",
+            "shape": "circularImage",
+            "image": "../imgs/학무늬베개/",
+            "label": "신안20336"
+        },
+        {
+            "id": "9",
+            "shape": "circularImage",
+            "image": "../imgs/학무늬베개/국화무늬.jpg",
+            "label": "국화무늬"
+        },
+        {
+            "id": "10",
+            "shape": "circularImage",
+            "image": "../imgs/학무늬베개/넝쿨무늬.jpg",
+            "label": "넝쿨무늬"
+        },
+        {
+            "id": "11",
+            "shape": "circularImage",
+            "image": "../imgs/학무늬베개/신안해저선1.jpeg",
+            "label": "신안"
+        },
+        {
+            "id": "12",
+            "shape": "circularImage",
+            "image": "../imgs/학무늬베개/마늘모양병.jpg",
+            "label": "마늘모양 병"
+        },
+        {
+            "id": "13",
+            "shape": "circularImage",
+            "image": "../imgs/학무늬베개/검은점무늬항아리.jpg",
+            "label": "검은점무늬 항아리"
+        },
+        {
+            "id": "14",
+            "shape": "circularImage",
+            "image": "../imgs/학무늬베개/물소모양연적.jpg",
+            "label": "물소모양 연적"
+        },
+        {
+            "id": "15",
+            "shape": "circularImage",
+            "image": "../imgs/학무늬베개/사자모양향로.jpg",
+            "label": "사자모양 향로"
+        }
+    ],
+    "links": [
+        {
+            "from": "1",
+            "to": "2",
+            "label": "사용된 기법"
+        },
+        {
+            "from": "1",
+            "to": "3",
+            "label": "종류"
+        },
+        {
+            "from": "1",
+            "to": "5",
+            "label": "무늬 이름"
+        },
+        {
+            "from": "1",
+            "to": "9",
+            "label": "무늬 이름"
+        },
+        {
+            "from": "1",
+            "to": "10",
+            "label": "무늬 이름"
+        },
+        {
+            "from": "1",
+            "to": "6",
+            "label": "관련 유물"
+        },
+        {
+            "from": "1",
+            "to": "7",
+            "label": "제작 시기"
+        },
+        {
+            "from": "1",
+            "to": "8",
+            "label": "소장품번호"
+        },
+        {
+            "from": "1",
+            "to": "11",
+            "label": "입수장소"
+        },
+        {
+            "from": "12",
+            "to": "11",
+            "label": "입수장소"
+        },
+        {
+            "from": "13",
+            "to": "11",
+            "label": "입수장소"
+        },
+        {
+            "from": "14",
+            "to": "11",
+            "label": "입수장소"
+        },
+        {
+            "from": "15",
+            "to": "11",
+            "label": "입수장소"
+        }
+    ]
+}

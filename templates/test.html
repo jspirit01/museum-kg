@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Network</title>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <header> Museum Knowledge Graph</header>
+    <div id="mynetwork"></div>
+    <footer> Soft Computing & Interaction Lab | made by jspirit </footer>
+    <script type="text/javascript">
+      var DIR = "img/soft-scraps-icons/";
+
+      var nodes = null;
+      var edges = null;
+      var network = null;
+
+      // Called when the Visualization API is loaded.
+      function draw() {
+        // create people.
+        // value corresponds with the age of the person
+        var DIR = "../img/indonesia/";
+        var DATA = "../datasets/museum.json";
+        fetch(DATA)
+          .then((res) => res.json())
+          .then((data) => {
+            nodes = data.nodes;
+            edges = data.links;
+
+            var container = document.getElementById("mynetwork");
+
+            var data = {
+              nodes: nodes,
+              edges: edges,
+            };
+            var options = {
+              nodes: {
+                borderWidth: 4,
+                size: 50,
+                color: {
+                  border: "#222222",
+                  background: "#666666",
+                },
+                font: { color: "#eeeeee" },
+              },
+              edges: {
+                color: "lightgray",
+              },
+              physics: {
+                // Even though it's disabled the options still apply to network.stabilize().
+                enabled: true,
+                solver: "repulsion",
+                repulsion: {
+                  nodeDistance: 200, // Put more distance between the nodes.
+                },
+              },
+              interaction: { hover: true },
+            };
+            network = new vis.Network(container, data, options);
+          });
+      }
+
+      window.addEventListener("load", () => {
+        draw();
+      });
+    </script>
+  </body>
+</html>

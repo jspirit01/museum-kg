@@ -1,0 +1,50 @@
+{
+  "name": "react-force-graph-vr",
+  "version": "1.13.5",
+  "description": "React component for VR force directed graphs",
+  "license": "MIT",
+  "unpkg": "dist/react-force-graph-vr.min.js",
+  "main": "dist/react-force-graph-vr.common.js",
+  "module": "dist/react-force-graph-vr.module.js",
+  "types": "dist/react-force-graph-vr.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vasturiano/react-force-graph.git"
+  },
+  "homepage": "https://github.com/vasturiano/react-force-graph",
+  "keywords": [
+    "react",
+    "force",
+    "graph",
+    "vr",
+    "a-frame",
+    "webgl"
+  ],
+  "author": {
+    "name": "Vasco Asturiano",
+    "url": "http://bl.ocks.org/vasturiano"
+  },
+  "bugs": {
+    "url": "https://github.com/vasturiano/react-force-graph/issues"
+  },
+  "scripts": {
+    "build": "rimraf dist && rollup -c",
+    "dev": "rollup -w -c rollup.config.dev.js",
+    "prepare": "npm run build"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "dependencies": {
+    "3d-force-graph-vr": "^1.35.1",
+    "prop-types": "^15.7.2",
+    "react-kapsule": "^2.2.1"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "rollup": "^2.30.0"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "nodes": [
+    {"id": "고양이", "img": "cat.jpg", "group": 1},
+    {"id": "개", "img": "dog.jpg", "group": 1},
+    {"id": "고래", "img": "whale.jpg", "group": 1}
+  ],
+  "links": [
+    {"source": "고양이", "target": "개", "label": "천적"},
+    {"source": "개", "target": "고래", "label": "반대 동물"}
+  ]
+}

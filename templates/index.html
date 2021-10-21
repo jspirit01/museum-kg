@@ -1,0 +1,102 @@
+<head>
+  <style> body { margin: 0; } </style>
+
+  <script src="//unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="//unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="//unpkg.com/babel-standalone"></script>
+  <script src="//unpkg.com/three"></script>
+  <script src="//unpkg.com/three-spritetext"></script>
+  <script src="//unpkg.com/react-force-graph-3d"></script>
+  <!--<script src="../../src/packages/react-force-graph-3d/dist/react-force-graph-3d.js"></script>-->
+
+  <script src="datasets/random-data.js"></script>
+</head>
+
+<body>
+<div id="graph"></div>
+
+<script type="text/jsx">
+  const { useState, useMemo, useCallback } = React;
+
+  const ExpandableGraph = ({ graphData }) => {
+    const rootId = "고양이";
+
+    const nodesById = useMemo(() => {
+      const nodesById = Object.fromEntries(graphData.nodes.map(node => [node.id, node]));
+
+      // link parent/children (초기화?)
+      graphData.nodes.forEach(node => {
+        node.collapsed = node.id !== rootId;
+        node.childLinks = [];
+      });
+      graphData.links.forEach(link => nodesById[link.source].childLinks.push(link));
+
+      return nodesById;
+    }, [graphData]);
+
+    const getPrunedTree = useCallback(() => {
+      const visibleNodes = [];
+      const visibleLinks = [];
+      (function traverseTree(node = nodesById[rootId]) {
+        visibleNodes.push(node);
+        if (node.collapsed) return;
+        visibleLinks.push(...node.childLinks);
+        node.childLinks
+          .map(link => ((typeof link.target) === 'object') ? link.target : nodesById[link.target]) // get child node
+          .forEach(traverseTree);
+      })();
+
+      return { nodes: visibleNodes, links: visibleLinks };
+    }, [nodesById]);
+
+    const [prunedTree, setPrunedTree] = useState(getPrunedTree());
+
+    const handleNodeClick = useCallback(node => {
+      node.collapsed = !node.collapsed; // toggle collapse state
+      setPrunedTree(getPrunedTree())
+    }, []);
+
+    return <ForceGraph3D
+      graphData={prunedTree}
+      linkDirectionalParticles={2}
+      nodeColor={node => !node.childLinks.length ? 'green' : node.collapsed ? 'red' : 'yellow'}
+      onNodeClick={handleNodeClick}
+      nodeThreeObject={({ img }) => {
+          const imgTexture = new THREE.TextureLoader().load(`../imgs/${img}`);
+          const material = new THREE.SpriteMaterial({ map: imgTexture });
+          const sprite = new THREE.Sprite(material);
+          sprite.scale.set(10, 10);   // 이미지 스케일 조정
+
+          return sprite;
+          }}
+      //link label 추가
+      linkThreeObjectExtend={true}
+      linkThreeObject={link => {
+            // extend link with text sprite
+            // const sprite = new SpriteText(`${link.source} -> ${link.target}`);
+            const sprite = new SpriteText(`${link.label}`);
+            sprite.color = 'lightgrey';
+            sprite.textHeight = 1.5;
+            return sprite;
+      }}
+      linkPositionUpdate={(sprite, { start, end }) => {
+            const middlePos = Object.assign(...['x', 'y', 'z'].map(c => ({
+              [c]: start[c] + (end[c] - start[c]) / 2 // calc middle point
+            })));
+
+            // Position sprite
+            Object.assign(sprite.position, middlePos);
+      }}
+    />;
+  };
+
+  fetch('../datasets/museum.json').then(res => res.json()).then(data => {
+    console.log(data)
+    ReactDOM.render(
+      <ExpandableGraph graphData = {data}/>,
+        //<ExpandableGraph graphData={genRandomTree(600, true)}/>,
+      document.getElementById('graph')
+  );
+  });
+</script>
+</body>
