@@ -4,152 +4,180 @@
             "id": "1",
             "shape": "circularImage",
             "image": "../imgs/학무늬베개/main.jpg",
-            "label": "학무늬 베개"
+            "label": "학무늬 베개",
+            "title": "https://www.museum.go.kr/site/main/relic/search/view?relicId=4657",
+            "hidden": false
         },
         {
             "id": "2",
             "shape": "circularImage",
             "image": "../imgs/학무늬베개/역상감(예시).jpeg",
-            "label": "역상감"
+            "label": "역상감", 
+            "hidden": true
         },
         {
             "id": "3",
             "shape": "circularImage",
             "image": "../imgs/학무늬베개/고려청자(대표).png",
-            "label": "청자"
+            "label": "청자",
+            "hidden": true
         },
         {
             "id": "5",
             "shape": "circularImage",
             "image": "../imgs/학무늬베개/학과 구름무늬.jpg",
-            "label": "학과 구름무늬"
+            "label": "학과 구름무늬",
+            "hidden": true
         },
         {
             "id": "6",
             "shape": "circularImage",
             "image": "../imgs/학무늬베개/학무늬 완.jpg",
-            "label": "학무늬 완"
+            "label": "학무늬 완",
+            "hidden": true
         },
         {
             "id": "7",
             "shape": "circularImage",
             "image": "../imgs/학무늬베개/고려(위치).png",
-            "label": "고려 13세기"
+            "label": "고려 13세기",
+            "hidden": true
         },
         {
             "id": "8",
             "shape": "circularImage",
             "image": "../imgs/학무늬베개/",
-            "label": "신안20336"
+            "label": "신안20336",
+            "hidden": true
         },
         {
             "id": "9",
             "shape": "circularImage",
             "image": "../imgs/학무늬베개/국화.jpg",
-            "label": "국화무늬"
+            "label": "국화무늬",
+            "hidden": true
         },
         {
             "id": "10",
             "shape": "circularImage",
             "image": "../imgs/학무늬베개/넝쿨무늬.jpg",
-            "label": "넝쿨무늬"
+            "label": "넝쿨무늬",
+            "hidden": true
         },
         {
             "id": "11",
             "shape": "circularImage",
             "image": "../imgs/학무늬베개/신안해저선1.jpeg",
-            "label": "신안"
+            "label": "신안",
+            "hidden": true
         },
         {
             "id": "12",
             "shape": "circularImage",
             "image": "../imgs/학무늬베개/마늘모양병.jpg",
-            "label": "마늘모양 병"
+            "label": "마늘모양 병",
+            "hidden": true
         },
         {
             "id": "13",
             "shape": "circularImage",
             "image": "../imgs/학무늬베개/검은점무늬항아리.jpg",
-            "label": "검은점무늬 항아리"
+            "label": "검은점무늬 항아리",
+            "hidden": true
         },
         {
             "id": "14",
             "shape": "circularImage",
             "image": "../imgs/학무늬베개/물소모양연적.jpg",
-            "label": "물소모양 연적"
+            "label": "물소모양 연적",
+            "hidden": true
         },
         {
             "id": "15",
             "shape": "circularImage",
             "image": "../imgs/학무늬베개/사자모양향로.jpg",
-            "label": "사자모양 향로"
+            "label": "사자모양 향로",
+            "hidden": true
         }
     ],
     "links": [
         {
             "from": "1",
             "to": "2",
-            "label": "사용된 기법"
+            "label": "사용된 기법",
+            "hidden": false
         },
         {
             "from": "1",
             "to": "3",
-            "label": "종류"
+            "label": "종류",
+            "hidden": false
         },
         {
             "from": "1",
             "to": "5",
-            "label": "무늬 이름"
+            "label": "무늬 이름",
+            "hidden": false
         },
         {
             "from": "1",
             "to": "9",
-            "label": "무늬 이름"
+            "label": "무늬 이름",
+            "hidden": false
         },
         {
             "from": "1",
             "to": "10",
-            "label": "무늬 이름"
+            "label": "무늬 이름",
+            "hidden": false
         },
         {
             "from": "1",
             "to": "6",
-            "label": "관련 유물"
+            "label": "관련 유물",
+            "hidden": false
         },
         {
             "from": "1",
             "to": "7",
-            "label": "제작 시기"
+            "label": "제작 시기",
+            "hidden": false
         },
         {
             "from": "1",
             "to": "8",
-            "label": "소장품번호"
+            "label": "소장품번호",
+            "hidden": false
         },
         {
             "from": "1",
             "to": "11",
-            "label": "입수장소"
+            "label": "입수장소",
+            "hidden": false
         },
         {
-            "from": "12",
-            "to": "11",
-            "label": "입수장소"
+            "from": "11",
+            "to": "12",
+            "label": "입수장소",
+            "hidden": false
         },
         {
-            "from": "13",
-            "to": "11",
-            "label": "입수장소"
+            "from": "11",
+            "to": "13",
+            "label": "입수장소",
+            "hidden": false
         },
         {
-            "from": "14",
-            "to": "11",
-            "label": "입수장소"
+            "from": "11",
+            "to": "14",
+            "label": "입수장소",
+            "hidden": false
         },
         {
-            "from": "15",
-            "to": "11",
-            "label": "입수장소"
+            "from": "11",
+            "to": "15",
+            "label": "입수장소",
+            "hidden": false
         }
     ]
 }

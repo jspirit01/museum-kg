@@ -1,78 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Network</title>
-    <script
-      type="text/javascript"
-      src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"
-    ></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-  </head>
-  <body>
-    <header> Museum Knowledge Graph</header>
-    <div id="mynetwork"></div>
-    <footer> Soft Computing & Interaction Lab | made by jspirit </footer>
-    <script type="text/javascript">
-      var DIR = "img/soft-scraps-icons/";
 
-      var nodes = null;
-      var edges = null;
-      var network = null;
+<head>
+  <title>Network</title>
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
 
-      // Called when the Visualization API is loaded.
-      function draw() {
-        // create people.
-        // value corresponds with the age of the person
-        var DIR = "../img/indonesia/";
-        var DATA = "../datasets/museum.json";
-        fetch(DATA)
-          .then((res) => res.json())
-          .then((data) => {
-            nodes = data.nodes;
-            edges = data.links;
+<body>
+  <h1> Museum Knowledge Graph</h1>
+  <div id="mynetwork"></div>
+  <footer> Soft Computing & Interaction Lab | made by jspirit </footer>
+  <script type="text/javascript">
+    var DIR = "img/soft-scraps-icons/";
 
-            var container = document.getElementById("mynetwork");
+    var nodes = null;
+    var edges = null;
+    var network = null;
 
-            var data = {
-              nodes: nodes,
-              edges: edges,
-            };
-            var options = {
-              nodes: {
-                borderWidth: 4,
-                size: 50,
-                color: {
-                  border: "#222222",
-                  background: "#666666",
+    // Called when the Visualization API is loaded.
+    function draw() {
+      // create people.
+      // value corresponds with the age of the person
+      var DIR = "../img/indonesia/";
+      var DATA = "../datasets/museum.json";
+      fetch(DATA)
+        .then((res) => res.json())
+        .then((res) => {
+          var node_list = res.nodes;
+          var edge_list = res.links;
+          nodes = new vis.DataSet(node_list);
+          edges = new vis.DataSet(edge_list);
+
+          function find_nodeObj(nodeId) {
+            return node_list.find(x => x.id == nodeId);   // 인접한 노드 찾기
+          }
+          function find_toEdgeObj(fromid) {
+            return edge_list.filter(x => x.from == fromid);
+          }
+
+          var container = document.getElementById("mynetwork");
+
+          var data = {
+            nodes: nodes,
+            edges: edges,
+          };
+          var options = {
+            nodes: {
+              borderWidth: 4,
+              size: 50,
+              color: {
+                border: "#222222",
+                background: "#666666",
+                highlight: {
+                  border: '#3caea3',
+                  background: '#D2E5FF'
                 },
-                font: { color: "#eeeeee" },
-              },
-              edges: {
-                color: "lightgray",
-              },
-              physics: {
-                // Even though it's disabled the options still apply to network.stabilize().
-                enabled: true,
-                solver: "repulsion",
-                repulsion: {
-                  nodeDistance: 200, // Put more distance between the nodes.
+                hover: {
+                  border: '#ed553b',
+                  background: '#D2E5FF'
                 },
               },
-              interaction: { hover: true },
-            };
-            network = new vis.Network(container, data, options);
+              
+              font: { color: "#eeeeee" },
+            },
+            edges: {
+              arrows: {
+                to: {
+                  enabled: false,
+                  scaleFactor: 1,
+                  type: "arrow"
+                }
+              },
+              endPointOffset: {
+                from: 0,
+                to: 0
+              },
+              color: {
+                color: '#848484',
+                highlight: '#3caea3',
+                hover: '#ed553b',
+                inherit: 'from',
+                opacity: 1.0
+              }, 
+              font: {
+                color: '#343434',
+                size: 14, // px
+                face: 'arial',
+                background: 'none',
+                strokeWidth: 1, // px
+                strokeColor: '#ffffff',
+                align: 'horizontal',
+                multi: false,
+                vadjust: 0,
+                bold: {
+                  color: '#343434',
+                  size: 14, // px
+                  face: 'arial',
+                  vadjust: 1,
+                  mod: 'bold'
+                },
+                ital: {
+                  color: '#343434',
+                  size: 14, // px
+                  face: 'arial',
+                  vadjust: 0,
+                  mod: 'italic',
+                },
+                boldital: {
+                  color: '#343434',
+                  size: 14, // px
+                  face: 'arial',
+                  vadjust: 0,
+                  mod: 'bold italic'
+                },
+                mono: {
+                  color: '#343434',
+                  size: 15, // px
+                  face: 'courier new',
+                  vadjust: 2,
+                  mod: ''
+                }
+              },
+              width: 2,
+              selectionWidth: 3
+              
+            },
+            physics: {
+              // Even though it's disabled the options still apply to network.stabilize().
+              enabled: true,
+              solver: "repulsion",
+              repulsion: {
+                nodeDistance: 200, // Put more distance between the nodes.
+              },
+            },
+            interaction: { hover: true },
+            manipulation: {
+              enabled: false,
+            },
+          };
+          network = new vis.Network(container, data, options);
+          network.on("showPopup", function (params) {
+            document.addEventListener('click', function (e) {
+              if (e.ctrlKey) {
+                var node_list = data.nodes;
+                for (idx in node_list) {
+                  if (node_list[idx].id == params) {
+                    // open url in 'title' attribute 
+                    window.open(node_list[idx].title);
+                  }
+                }
+                return;
+              }
+            });
+
           });
-      }
+          network.on("hoverNode", function (params) {
+            // network.setOptions({edges:{color:"black"}});
+            // options[edges] = { color: 'black'};
+          });
 
-      window.addEventListener("load", () => {
-        draw();
-      });
-    </script>
-  </body>
+          network.on("doubleClick", function (params) {
+            const clickedNode = find_nodeObj(params.nodes[0]);
+            var items = find_toEdgeObj(params.nodes[0]);
+            if (items.length != 0) {
+              targetId = items[0].to;
+              var targetNode = find_nodeObj(targetId);
+              if (targetNode.hidden) {   // case 1: 확장되지 않은 노드 -> 확장시킨다.
+                for (idx in items) {
+                  targetId = items[idx].to; // 그 노드의 id 찾기
+                  var targetNode = find_nodeObj(targetId);
+                  targetNode.hidden = false;
+                  nodes.update([targetNode]);
+                }
+              }
+              else {
+                // case 2: 확장된 노드 -> 노드와 관련된 모든 하위 노드를 닫는다.
+                recursiveClosingNode(params.nodes[0]);
+              }
+            }
+
+            function recursiveClosingNode(nodeId) {
+              var items = find_toEdgeObj(nodeId);
+              if (items.length != 0) {
+                for (idx in items) {
+                  targetId = items[idx].to; // 그 노드의 id 찾기
+                  var targetNode = find_nodeObj(targetId);
+                  recursiveClosingNode(targetId);     // recursive function 위치는 여기에!!
+                  targetNode.hidden = true;
+                  nodes.update([targetNode]);
+                }
+              }
+              else {
+                return;
+              }
+            }
+          });
+        });
+    }
+
+    window.addEventListener("load", () => {
+      draw();
+    });
+  </script>
+</body>
+
 </html>
